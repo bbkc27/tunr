@@ -1,0 +1,19 @@
+{% extends 'tunr/base.html' %}
+{% block title %}- {{artist.name}}{% endblock %}
+{% block content %}
+<h2>{{artist.name}} <a href="{% url 'artist_edit' pk=artist.pk %}">Edit me!</a></h2>
+<h4>{{artist.nationality}}</h4>
+
+<img src="{{artist.photo_url}}" alt="{{artist.name}} photo" />
+
+<a href="{% url 'artist_delete' pk=artist.pk %}">Delete</a>
+
+<h3>Songs <a href="/songs/new">(+)</a> </h3>
+<ul>
+  {% for song in artist.songs.all %}
+    <li>
+      <a href="{% url 'song_detail' pk=song.pk %}">{{song.title}} - {{song.album}}</a>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock%}
